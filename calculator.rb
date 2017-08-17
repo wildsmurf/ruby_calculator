@@ -7,10 +7,10 @@ require "pry"
 # saves value and uploads to the first number
 # some sort of command to remove stored value
 
-first_number = []
+@first_number = []
 
-while
 
+def start
   puts "Welcome to the Ruby Calculator!"
   puts "Please input a number."
   num1 = gets.strip.to_f
@@ -19,20 +19,42 @@ while
   puts "And what's your final number?"
   num2 = gets.strip.to_f
 
-result = case oper
-  when :+ then num1 + num2
-  when :- then num1 - num2
-  when :* then num1 * num2
-  when :/ then num1 / num2
-  else puts "Invalid, I only support '+ - * /' operators."
-end
-first_number << result
-puts "#{result} \nType a operator to keep going or type clear."
-oper = gets.strip.to_sym
-puts "Your next number?"
-num2 = gets.strip.to_f
 
+
+  result = case oper
+    when :+ then num1 + num2
+    when :- then num1 - num2
+    when :* then num1 * num2
+    when :/ then num1 / num2
+    else puts "Invalid, I only support '+ - * /' operators."
+  end
+  @first_number << result
 end
+
+
+
+def continue
+  puts "#{[@first_number[-1]]} \nType a operator to keep going or type clear."
+  oper = gets.strip.to_sym
+  puts "Your next number?"
+  num2 = gets.strip.to_f
+
+  result = case oper
+    when :+ then @first_number[-1] + num2
+    when :- then @first_number[-1] - num2
+    when :* then @first_number[-1] * num2
+    when :/ then @first_number[-1] / num2
+    else puts "Invalid, I only support '+ - * /' operators."
+  end
+  @first_number << result
+  puts @first_number[-1]
+end
+
+start
+while true
+  continue
+end
+
 
 # result2 = case oper2
 # when :+ then result + num3
